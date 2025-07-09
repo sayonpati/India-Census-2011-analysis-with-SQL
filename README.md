@@ -1,12 +1,5 @@
 # India Census 2011 analysis with SQL
 
-use census;
-
-select * from literacy;
-
-select * from population;
-
-
 ---- Find the total Population of India
 
 Select FORMAT(sum(population),'N') as Total_Population from population;
