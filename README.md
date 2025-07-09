@@ -3,22 +3,32 @@
 use census;
 
 select * from literacy;
+
 select * from population;
 
+
 ---- Find the total Population of India
+
 Select FORMAT(sum(population),'N') as Total_Population from population;
 
+
 ---- Find the average growth rate in India as compared to the previous census
+
 select round(avg(growth),2) Average_growth from literacy;
 
+
 ---- Find the average growth rate for each state as compared to the previous census
+
 select state, round(avg(growth),2) as Average_growth from literacy
 group by state;
 
+
 ---- Find the details of Jharkhand and Bihar
+
 select * from literacy
 join population on population.district = literacy.district
 where literacy.state in ('Jharkhand','Bihar');
+
 
 ---- Find the previous and current population density for each state
 
@@ -35,7 +45,9 @@ from (
   ) c
 ) a;
 
+
 ---- Find top 3 districts from each state with highest literacy rate
+
 -- Using Windows Function
 
 select a.* from (
@@ -68,6 +80,7 @@ select a.* from (
 where a.districtwise_growth in (1,2,3)
 order by state;
 
+
 --- Using Common Table Expression and Windows Function (CTE)
 with Top_3 as (
   select district, state, growth,
@@ -77,6 +90,7 @@ with Top_3 as (
 )
 select * from top_3
 where districtwise_growth <= 3;
+
 
 ---- Find the population in the previous census
 
@@ -93,6 +107,7 @@ from (
   ) as c
 ) as e
 group by e.state;
+
 
 ---- Find the total literate population for each state
 
@@ -120,6 +135,7 @@ from (
 ) c
 group by c.state;
 
+
 ---- Find the number of males and females for each state
 
 select l.state,
@@ -143,6 +159,7 @@ from (
 ) as d
 group by l.state;
 
+
 ---- Find the states with an average literacy ratio greater than 90
 
 select state, round(avg(literacy),2) as average_literacy
@@ -150,6 +167,7 @@ from literacy
 group by state
 having average_literacy > 90
 order by average_literacy;
+
 
 ---- Top 3 state showing highest growth ratio
 
@@ -167,10 +185,12 @@ select * from (
   limit 3
 ) as top3;
 
+
 ---- States starting with the letter a
 
 select distinct state from literacy
 where state like 'a%' or state like '%d';
+
 
 ---- Find the number of females for the district with the highest literacy rate
 
