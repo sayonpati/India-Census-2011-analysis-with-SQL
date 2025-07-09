@@ -1,5 +1,4 @@
-# Sayon-Portfolio
-Data Analytics Portfolio
+# India Census 2011 analysis with SQL
 
 use census;
 
